@@ -39,7 +39,7 @@ export default function Home() {
     if (audioSupported === false) {
       return (
           <div className="flex flex-col items-center justify-center h-screen">
-              <p className="text-red-500 text-lg">Selaimesi ei tue tarvittavia ääniominaisuuksia. Päivitä selain tai kokeile toista selainta.</p>
+              <p className="text-red-500 text-lg">Your browser does not support the audio element. Please update your browser to the latest version or try a modern browser like Chrome, Firefox, or Edge.</p>
           </div>
       );
     }
