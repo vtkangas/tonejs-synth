@@ -35,14 +35,14 @@ export default function Home() {
     synth.triggerAttackRelease("C4", "8n");
   };
 
-    // I f  T o n e . j s  i s  n o t  s u p p o r t e d
-    if (audioSupported === false) {
-      return (
-          <div className="flex flex-col items-center justify-center h-screen">
-              <p className="text-red-500 text-lg">Your browser does not support the audio element. Please update your browser to the latest version or try a modern browser like Chrome, Firefox, or Edge.</p>
-          </div>
-      );
-    }
+  // I f  T o n e . j s  i s  n o t  s u p p o r t e d ! ! !
+  if (audioSupported === false) {
+    return (
+        <div className="flex flex-col items-center justify-center h-screen">
+            <p className="text-red-500 text-lg">Your browser does not support the audio element. Please update your browser to the latest version or try a modern browser like Chrome, Firefox, or Edge.</p>
+        </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
