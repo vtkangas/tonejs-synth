@@ -3,6 +3,7 @@
 import * as Tone from "tone";
 
 import { useState, useEffect } from "react";
+import Knob from "@/components/Knob"
 
 export default function Home() {
   const [audioStarted, setAudioStarted] = useState(false);
@@ -54,12 +55,25 @@ export default function Home() {
           Start Audio
         </button>
       ) : (
+        <>
         <button
-          className="px-4 py-2 border-4 text-lg rounded-3xl text-green-500 border-green-500 hover:bg-green-500 hover:text-gray-50"
+          className="px-4 py-2 border-4 mb-6 text-lg rounded-3xl text-green-500 border-green-500 hover:bg-green-500 hover:text-gray-50"
           onClick={playNote}
         >
           Play Note
         </button>
+        <Knob
+          theme="pink"
+          label="Volume"
+          valueDefault={0.5}
+          valueMin={0}
+          valueMax={1}
+          stepFn={(value) => 0.05}  //these are for keyboard input
+          stepLargerFn={(value) => 0.1}   //these are for keyboard input
+          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          orientation={'vertical'}
+        />
+        </>
       )}
     </div>
   );

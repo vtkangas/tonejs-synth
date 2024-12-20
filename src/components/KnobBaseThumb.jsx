@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import {mapFrom01Linear} from '@dsp-ts/math';
-
+//absolute left-1/2 top-1 h-[6px] w-[6px] -translate-x-1/2 rounded-full bg-stone-950
 export function KnobBaseThumb({theme, value01}) {
   const angleMin = -145;
   const angleMax = 145;
@@ -16,7 +16,7 @@ export function KnobBaseThumb({theme, value01}) {
       )}
     >
       <div className='absolute h-full w-full' style={{rotate: `${angle}deg`}}>
-        <div className='absolute left-1/2 top-0 h-1/2 w-[6px] -translate-x-1/2 rounded-sm bg-stone-950' />
+        <div className='absolute left-1/2 top-0 h-1/3 w-[6px] -translate-x-1/2 rounded-none bg-stone-950' />
       </div>
     </div>
   );
