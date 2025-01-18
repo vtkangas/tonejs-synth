@@ -13,6 +13,7 @@ export default function SynthRack() {
     playNote,
     stopNote,
     updateSynthSettings,
+    handleVolumeChange,
   } = useSynth();
 
   // I f  T o n e . j s  i s  n o t  s u p p o r t e d ! ! !
@@ -49,6 +50,7 @@ export default function SynthRack() {
               <Synth
                 synthSettings={synthSettings}
                 updateSynthSettings={updateSynthSettings}
+                handleVolumeChange={handleVolumeChange}
               />
             </div>
             <div className="flex-none h-full w-[150vw] bg-lime-200">

@@ -31,7 +31,7 @@ export default function Knob({
   const step = stepFn(valueRaw);
   const stepLarger = stepLargerFn(valueRaw);
   const dragSensitivity = 0.006;
-  
+
   // mapping raw value to 0-1 scale and back to actual range
   const value01 = mapTo01(valueRaw, valueMin, valueMax); // Normalize to 0-1 range
   const valueMapped = mapFrom01(value01, valueMin, valueMax); // Map back to actual range
@@ -53,20 +53,18 @@ export default function Knob({
 
   return (
     <div className="relative w-11 justify-items-center align-middle z-10">
-      {/* Parameter value display */}
+      {/* Value display */}
       <div
-        className={`absolute -left-1 transform  text-black bg-sky-200 px-2 
-            border-2 border-solid border-black rounded-md shadow-md font-bold transition-all duration-300 z-10 ${
-              isHovered
-                ? "opacity-100 translate-y-[-60px] scale-100"
-                : "opacity-0 translate-y-0 scale-50"
-            }`}
+        className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-300 
+            ${isHovered ? "top-[-60px] opacity-100 scale-100" : "opacity-0 scale-50 top-0"}
+            whitespace-nowrap text-black bg-sky-200 px-2 
+            border-2 border-solid border-black rounded-md shadow-md font-bold z-10`}
       >
         <KnobHeadlessOutput htmlFor={knobId}>
           {valueRawDisplayFn(valueMapped)}
         </KnobHeadlessOutput>
       </div>
-
+      {/* Value display ends*/}
       <div className="relative flex flex-col items-center">
         {/* Shadow */}
         <div className="absolute w-10 h-10 bg-gray-400 rounded-full translate-x-1 translate-y-1"></div>
@@ -84,10 +82,10 @@ export default function Knob({
           onTouchEnd={handleTouchEnd}
           valueMin={valueMin}
           valueMax={valueMax}
-          valueRaw={valueMapped}  // Use the mapped value
+          valueRaw={valueMapped} // Use the mapped value
           onValueRawChange={handleValueChange}
-          valueRawRoundFn={(value) => Math.round(value * 100) / 100}
-          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={valueRawDisplayFn}
           dragSensitivity={dragSensitivity}
           orientation={orientation}
           mapTo01={(value) => mapTo01(value, valueMin, valueMax)} // Map value to 0-1

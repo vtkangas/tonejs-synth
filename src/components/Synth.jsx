@@ -6,11 +6,7 @@ import VolumeController from "@/components/VolumeController";
 import EnvelopeController from "@/components/EnvelopeController";
 import FilterController from "./FilterController";
 
-export default function Synth({ synthSettings, updateSynthSettings }) {
-  const handleKnobChange = (setting, value) => {
-    console.log(`Knob Change - Setting: ${setting}, Value: ${value}`);
-    updateSynthSettings({ [setting]: value });
-  };
+export default function Synth({ synthSettings, updateSynthSettings, volume, handleVolumeChange }) {
 
   return (
     <div className="inline-block landscape:inline-flex h-full w-full max-h-[390px] landscape:h-[280px] bg-emerald-200 rounded-lg border-solid border-2 border-slate-950 py-6 pl-6 pr-4">
@@ -26,7 +22,7 @@ export default function Synth({ synthSettings, updateSynthSettings }) {
           />
         </div>
         <div className="flex flex-1 justify-end landscape:flex-none landscape:justify-start">
-          <VolumeController />
+          <VolumeController volume={synthSettings.volume} handleVolumeChange={handleVolumeChange}/>
         </div>
       </div>
 
