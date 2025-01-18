@@ -1,4 +1,8 @@
 import Knob from "@/components/Knob";
+import {
+  displayValueAsPercentage,
+  displayValueInSeconds,
+} from "@/utils/valueDisplayFns";
 
 export default function EnvelopeController({
   synthSettings,
@@ -8,6 +12,8 @@ export default function EnvelopeController({
     console.log(`Knob Change - Setting: ${setting}, Value: ${value}`);
     updateSynthSettings({ [setting]: value });
   };
+
+  const valueRawRoundFn = (x) => x;
 
   return (
     <div className="inline-block row-span-1 gap-2">
@@ -22,7 +28,8 @@ export default function EnvelopeController({
           valueMax={2}
           stepFn={(value) => 0.05} //keyboard input
           stepLargerFn={(value) => 0.1} //keyboard input
-          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={displayValueInSeconds}
           orientation={"vertical"}
           onChange={(value) => handleKnobChange("attack", value)}
         />
@@ -33,9 +40,10 @@ export default function EnvelopeController({
           valueDefault={synthSettings.decay}
           valueMin={0}
           valueMax={2}
-          stepFn={(value) => 0.05} 
+          stepFn={(value) => 0.05}
           stepLargerFn={(value) => 0.1}
-          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={displayValueInSeconds}
           orientation={"vertical"}
           onChange={(value) => handleKnobChange("decay", value)}
         />
@@ -48,7 +56,8 @@ export default function EnvelopeController({
           valueMax={1}
           stepFn={(value) => 0.05}
           stepLargerFn={(value) => 0.1}
-          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={displayValueAsPercentage}
           orientation={"vertical"}
           onChange={(value) => handleKnobChange("sustain", value)}
         />
@@ -59,9 +68,10 @@ export default function EnvelopeController({
           valueDefault={synthSettings.release}
           valueMin={0}
           valueMax={5}
-          stepFn={(value) => 0.05} 
+          stepFn={(value) => 0.05}
           stepLargerFn={(value) => 0.1}
-          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={displayValueInSeconds}
           orientation={"vertical"}
           onChange={(value) => handleKnobChange("release", value)}
         />

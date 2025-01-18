@@ -14,6 +14,7 @@ const useSynth = () => {
     filterType: "lowpass",
     filterFreq: 200,
     filterQ: 1,
+    volume: -12,
   });
 
   // C h e c k  T o n e . j s  s u p p o r t
@@ -42,7 +43,7 @@ const useSynth = () => {
         },
         filter: {
           type: synthSettings.filterType,
-          rolloff: -24,
+          rolloff: -12,
           Q: synthSettings.filterQ,
         },
         filterEnvelope: {
@@ -50,6 +51,8 @@ const useSynth = () => {
           baseFrequency: synthSettings.filterFreq,
           },          
       }).toDestination();
+
+      Tone.getDestination().volume.value = synthSettings.volume;
 
       return () => {
         synthRef.current.dispose();
@@ -138,6 +141,16 @@ const useSynth = () => {
       return updatedSettings;
     });
   };
+
+  const handleVolumeChange = (newVolume) => {
+    setSynthSettings((prevSettings) => {
+      const updatedSettings = { ...prevSettings, volume: newVolume };
+      if (synthRef.current) {
+        synthRef.current.volume.value = newVolume; 
+      }
+      return updatedSettings;
+    });
+  };
   
   return {
     audioSupported,
@@ -148,6 +161,7 @@ const useSynth = () => {
     playNote,
     stopNote,
     updateSynthSettings,
+    handleVolumeChange,
   };
 };
 

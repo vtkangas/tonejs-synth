@@ -1,5 +1,6 @@
 import Knob from "@/components/Knob";
 import FilterSelector from "@/components/FilterSelector";
+import { displayValueAsFrequencies } from "@/utils/valueDisplayFns";
 
 export default function FilterController({
   synthSettings,
@@ -9,6 +10,7 @@ export default function FilterController({
     console.log(`Knob Change - Setting: ${setting}, Value: ${value}`);
     updateSynthSettings({ [setting]: value });
   };
+  const valueRawRoundFn = (x) => x;
 
   return (
     <div className="inline-block row-span-1 gap-2">
@@ -26,7 +28,8 @@ export default function FilterController({
           valueMax={10}
           stepFn={(value) => 0.05}
           stepLargerFn={(value) => 0.1}
-          valueRawDisplayFn={(value) => `${(value * 100).toFixed(0)}%`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={(value) => value.toFixed(2)}
           orientation={"vertical"}
           onChange={(value) => handleKnobChange("filterQ", value)}
         />
@@ -38,7 +41,8 @@ export default function FilterController({
           valueMax={20000}
           stepFn={(value) => 0.05}
           stepLargerFn={(value) => 0.1}
-          valueRawDisplayFn={(value) => `${value}`}
+          valueRawRoundFn={valueRawRoundFn}
+          valueRawDisplayFn={displayValueAsFrequencies}
           orientation={"vertical"}
           onChange={(value) => handleKnobChange("filterFreq", value)}
         />
