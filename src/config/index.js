@@ -8,6 +8,6 @@ export const waveforms = [
 ];
 
 export const filters = [
-  { id: "low-pass", src: "/low-pass.svg" },
-  { id: "high-pass", src: "/high-pass.svg" },
+  { id: "lowpass", src: "/lowpass.svg" },
+  { id: "highpass", src: "/highpass.svg" },
 ];
