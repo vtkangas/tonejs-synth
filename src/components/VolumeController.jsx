@@ -13,7 +13,7 @@ export default function VolumeController({ volume, handleVolumeChange }) {
   };
   
   return (
-    <div className="flex flex-col items-center justify-center border-dotted rounded-xl border-[#0CA789] border-4 px-4 py-2 gap-1">
+    <div className="flex flex-col items-center justify-center border-dotted rounded-xl border-[#0CA789] border-4 px-4 py-1 gap-1">
       <h1 className="font-semibold text-lg text-slate-950 mb-1">Master</h1>
       <Knob
         theme="master"

@@ -16,6 +16,9 @@ const useSynth = () => {
     filterQ: 1,
     volume: -12,
   });
+  const [feedbackDelay, setFeedbackDelay] = useState(null);
+  const [reverb, setReverb] = useState(null);
+  const [phaser, setPhaser] = useState(null);
 
   // C h e c k  T o n e . j s  s u p p o r t
   useEffect(() => {
@@ -32,6 +35,10 @@ const useSynth = () => {
 
   // c r e a t e  s y n t h
   useEffect(() => {
+    let newDelay;
+    let newReverb;
+    let newPhaser;
+
     if (audioStarted) {
       synthRef.current = new Tone.PolySynth(Tone.MonoSynth, {
         oscillator: { type: synthSettings.oscillatorType },
@@ -49,13 +56,43 @@ const useSynth = () => {
         filterEnvelope: {
           attack: 0.1,
           baseFrequency: synthSettings.filterFreq,
-          },          
+        },
       }).toDestination();
 
+      newDelay = new Tone.FeedbackDelay({
+        delayTime: 0.5,
+        feedback: 0.5,
+        wet: 0.5,
+      });
+      setFeedbackDelay(newDelay);
+
+      newReverb = new Tone.Reverb({
+        decay: 1.5,
+        preDelay: 0.2,
+        wet: 0.5,
+      });
+      setReverb(newReverb);
+
+      newPhaser = new Tone.Phaser({
+        frequency: 15,
+        octaves: 5,
+        baseFrequency: 1000,
+        wet: 0.5,
+      })
+      setPhaser(newPhaser);
+
+      synthRef.current.chain(
+        newDelay,
+        newReverb,
+        newPhaser,
+        Tone.getDestination()
+      );
       Tone.getDestination().volume.value = synthSettings.volume;
 
       return () => {
         synthRef.current.dispose();
+        newDelay.dispose();
+        newReverb.dispose();
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -109,7 +146,7 @@ const useSynth = () => {
     console.log("Updating synth settings:", newSettings);
     setSynthSettings((prev) => {
       const updatedSettings = { ...prev, ...newSettings };
-  
+
       if (synthRef.current) {
         // Apply only the updated parameters
         Object.keys(newSettings).forEach((key) => {
@@ -131,7 +168,7 @@ const useSynth = () => {
               },
               filterEnvelope: {
                 baseFrequency: synthSettings.filterFreq,
-              },   
+              },
             });
           }
         });
@@ -146,12 +183,12 @@ const useSynth = () => {
     setSynthSettings((prevSettings) => {
       const updatedSettings = { ...prevSettings, volume: newVolume };
       if (synthRef.current) {
-        synthRef.current.volume.value = newVolume; 
+        synthRef.current.volume.value = newVolume;
       }
       return updatedSettings;
     });
   };
-  
+
   return {
     audioSupported,
     audioStarted,
@@ -162,6 +199,9 @@ const useSynth = () => {
     stopNote,
     updateSynthSettings,
     handleVolumeChange,
+    feedbackDelay,
+    reverb,
+    phaser,
   };
 };
 

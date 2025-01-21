@@ -1,0 +1,145 @@
+/* General layout for effects */
+.effect-container {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: 100%;
+  min-width: 140px;
+  max-width: 200px;
+  max-height: 390px;
+  border: 2px solid var(--effect-border-color, #020617);
+  border-radius: 8px;
+  background-color: var(--effect-bg-color, #5eead4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Top bar for effect components */
+.effect-top-bar {
+  display: flex;
+  flex-direction: row;
+  min-height: 60px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--effect-top-bar-bg, #38b2ac);
+  border-bottom: 2px solid var(--effect-border-color, #020617);
+  padding: 0.5rem;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Effect content area */
+.effect-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.effect-container:has(.effect-content > *:nth-child(n+3)) {
+  width: 50vw;
+  max-width: 250px; 
+}
+
+.effect-content-left {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.effect-content-left:hover {
+  z-index: 50;
+}
+
+.effect-content-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.effect-content-right:hover {
+  z-index: 50;
+}
+
+.effect-content-left .effect-knob {
+  justify-content: center; 
+  padding-bottom: 8px;
+}
+
+.effect-content-right .effect-knob {
+  justify-content: center; 
+}
+
+/* Dynamic child count behavior for justifying effect-knob */
+.effect-content-left:has(.effect-knob:nth-child(n+2)) .effect-knob {
+  justify-content: flex-end;
+}
+
+.effect-content-left:has(.effect-knob:nth-child(n+2)) .effect-knob {
+  justify-content: flex-end;
+}
+
+.effect-content-left:has(.effect-knob:nth-child(n+2)) ~ .effect-content-right .effect-knob {
+  justify-content: flex-start;
+}
+
+.effect-content-left:not(:has(.effect-knob:nth-child(n+2))) .effect-knob {
+  justify-content: center;
+}
+
+.effect-knob {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+
+/* Typography */
+.effect-title {
+  font-size: 1.25rem;
+  color: var(--effect-title-color, #ffffff);
+}
+
+/* Responsive layout for landscape */
+@media (orientation: landscape) {
+  
+  .effect-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .effect-content-left, .effect-content-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; 
+  }
+  
+  .effect-content-left:has(.effect-knob:nth-child(n+2)) {
+    flex-direction: row;
+  }
+
+  .effect-content-left:has(.effect-knob:nth-child(n+2)) {
+    order: 2; /* Move to the bottom row */
+  }
+
+  .effect-content-right {
+    order: 1; /* Move to the top row */
+  }
+
+  .effect-content-left:has(.effect-knob:nth-child(n+2)) .effect-knob {
+    justify-content: center;
+  }
+  
+  .effect-content-left:has(.effect-knob:nth-child(n+2)) ~ .effect-content-right .effect-knob {
+    justify-content: center;
+  }
+
+  .effect-knob {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
+  }
+    
+}

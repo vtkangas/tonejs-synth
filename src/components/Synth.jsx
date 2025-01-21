@@ -1,15 +1,14 @@
 "use client";
 
-import Knob from "@/components/Knob";
 import WaveformSelector from "@/components/WaveformSelector";
 import VolumeController from "@/components/VolumeController";
 import EnvelopeController from "@/components/EnvelopeController";
 import FilterController from "./FilterController";
 
-export default function Synth({ synthSettings, updateSynthSettings, volume, handleVolumeChange }) {
+export default function Synth({ synthSettings, updateSynthSettings, handleVolumeChange }) {
 
   return (
-    <div className="inline-block landscape:inline-flex h-full w-full max-h-[390px] landscape:h-[280px] bg-emerald-200 rounded-lg border-solid border-2 border-slate-950 py-6 pl-6 pr-4">
+    <div className="flex flex-col landscape:flex-row h-full w-full max-h-[390px] justify-evenly bg-emerald-200 rounded-lg border-solid border-2 border-slate-950 py-4 pl-6 pr-4">
       {/* wave and master volume */}
       <div className="flex flex-row landscape:flex-col landscape:mr-6 gap-y-2">
         <div className="flex-1 justify-start landscape:flex-none">
