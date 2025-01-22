@@ -7,10 +7,10 @@ const useSynth = () => {
   const synthRef = useRef(null);
   const [synthSettings, setSynthSettings] = useState({
     oscillatorType: "sine",
-    attack: 0.1,
-    decay: 0.3,
-    sustain: 0.5,
-    release: 0.3,
+    attack: 0.005,
+    decay: 0.1,
+    sustain: 0.9,
+    release: 1,
     filterType: "lowpass",
     filterFreq: 200,
     filterQ: 1,
@@ -19,6 +19,8 @@ const useSynth = () => {
   const [feedbackDelay, setFeedbackDelay] = useState(null);
   const [reverb, setReverb] = useState(null);
   const [phaser, setPhaser] = useState(null);
+  const [vibrato, setVibrato] = useState(null);
+
 
   // C h e c k  T o n e . j s  s u p p o r t
   useEffect(() => {
@@ -38,6 +40,7 @@ const useSynth = () => {
     let newDelay;
     let newReverb;
     let newPhaser;
+    let newVibrato;
 
     if (audioStarted) {
       synthRef.current = new Tone.PolySynth(Tone.MonoSynth, {
@@ -54,8 +57,13 @@ const useSynth = () => {
           Q: synthSettings.filterQ,
         },
         filterEnvelope: {
-          attack: 0.1,
+          attack: 0.6,
           baseFrequency: synthSettings.filterFreq,
+          decay: 0.2,
+          exponent: 2,
+          octaves: 3,
+          release: 2,
+          sustain: 0.5,
         },
       }).toDestination();
 
@@ -74,17 +82,27 @@ const useSynth = () => {
       setReverb(newReverb);
 
       newPhaser = new Tone.Phaser({
-        frequency: 15,
-        octaves: 5,
-        baseFrequency: 1000,
+        frequency: 0.5,
+        octaves: 3,
+        stages: 8,
+        Q: 5,
+        baseFrequency: 350,
         wet: 0.5,
-      })
+      });
       setPhaser(newPhaser);
+
+      newVibrato = new Tone.Vibrato({
+        maxDelay: 0.005, 
+        frequency : 0,
+        depth : 0.1,
+      });
+      setVibrato(newVibrato);
 
       synthRef.current.chain(
         newDelay,
         newReverb,
         newPhaser,
+        newVibrato,
         Tone.getDestination()
       );
       Tone.getDestination().volume.value = synthSettings.volume;
@@ -93,6 +111,8 @@ const useSynth = () => {
         synthRef.current.dispose();
         newDelay.dispose();
         newReverb.dispose();
+        newPhaser.dispose();
+        newVibrato.dispose();
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -112,11 +132,11 @@ const useSynth = () => {
     }
   };
 
-  const playNote = () => {
+  const playNote = (key) => {
     try {
       if (synthRef.current && audioStarted) {
-        synthRef.current.triggerAttack("C4");
-        console.log("Note C4 is playing");
+        synthRef.current.triggerAttack(key);
+        console.log(`Note ${key} is playing`);
       } else {
         console.warn(
           "Synth is not initialized or audio context has not started"
@@ -127,11 +147,11 @@ const useSynth = () => {
     }
   };
 
-  const stopNote = () => {
+  const stopNote = (key) => {
     try {
       if (synthRef.current && audioStarted) {
-        synthRef.current.triggerRelease("C4");
-        console.log("Note C4 is stopped");
+        synthRef.current.triggerRelease(key);
+        console.log(`Note ${key} is stopped`);
       } else {
         console.warn(
           "Synth is not initialized or audio context has not started"
@@ -202,6 +222,7 @@ const useSynth = () => {
     feedbackDelay,
     reverb,
     phaser,
+    vibrato,
   };
 };
 

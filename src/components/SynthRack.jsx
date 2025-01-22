@@ -5,6 +5,8 @@ import Synth from "@/components/Synth";
 import Delay from "@/components/effects/Delay";
 import Reverb from "@/components/effects/Reverb";
 import Phaser from "@/components/effects/Phaser";
+import Vibrato from "@/components/effects/Vibrato";
+import Keyboard from "@/components/Keyboard";
 
 export default function SynthRack() {
   const {
@@ -18,7 +20,8 @@ export default function SynthRack() {
     handleVolumeChange,
     feedbackDelay,
     reverb,
-    phaser
+    phaser,
+    vibrato,
   } = useSynth();
 
   // I f  T o n e . j s  i s  n o t  s u p p o r t e d ! ! !
@@ -67,24 +70,13 @@ export default function SynthRack() {
             <div className="scroll-ml-4 snap-start">
               <Phaser phaser={phaser} />
             </div>
+            <div className="scroll-ml-4 snap-start">
+              <Vibrato vibrato={vibrato} />
+            </div>
           </div>
           {/* keyboard */}
-          <div className="flex row-span-3 landscape:row-span-2 h-full w-screen items-center justify-center bg-pink-500 overflow-hidden">
-            <button
-              className="px-4 py-2 border-4 mb-6 text-lg rounded-3xl bg-slate-50 
-            text-green-500 border-green-500 hover:bg-green-500 hover:text-gray-50"
-              onTouchStart={playNote}
-              onTouchEnd={stopNote}
-              onMouseDown={playNote}
-              onMouseUp={stopNote}
-              style={{
-                touchAction: 'none', // Prevent default touch actions on mobile
-                userSelect: 'none',  // Prevent text selection on mobile
-                WebkitUserSelect: 'none', // Prevent text selection on mobile for Webkit-based browsers
-              }}
-            >
-              Play Note
-            </button>
+          <div className="flex row-span-3 landscape:row-span-2 h-full w-screen bg-pink-500 overflow-x-auto overflow-y-hidden">
+            <Keyboard playNote={playNote} stopNote={stopNote} />
           </div>
         </div>
       )}
