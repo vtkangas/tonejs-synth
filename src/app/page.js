@@ -2,7 +2,7 @@ import SynthRack from "@/components/SynthRack";
 
 export default function Home() {
   return (
-    <main >
+    <main>
       <SynthRack />
     </main>
   );

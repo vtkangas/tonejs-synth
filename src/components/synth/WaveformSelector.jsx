@@ -1,5 +1,6 @@
 import Selector from "@/components/Selector";
 import { waveforms } from "@/config/index";
+import "./synth.css";
 
 export default function WaveformSelector({ synthSettings, updateSynthSettings }) {
   const handleWaveformChange = (id) => {

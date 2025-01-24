@@ -3,6 +3,7 @@ import {
   displayValueAsPercentage,
   displayValueInSeconds,
 } from "@/utils/valueDisplayFns";
+import "./synth.css";
 
 export default function EnvelopeController({
   synthSettings,
@@ -17,7 +18,7 @@ export default function EnvelopeController({
 
   return (
     <div className="inline-block row-span-1 gap-2">
-      <h1 className="font-semibold text-lg text-slate-950 mb-1">Envelope</h1>
+      <h1 className="text-slate-950 mb-1">Envelope</h1>
       <div className="flex flex-row gap-6 justify-start">
         {/* Attack */}
         <Knob

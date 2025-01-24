@@ -6,11 +6,15 @@
   height: 100%;
   min-width: 140px;
   max-width: 200px;
-  max-height: 390px;
+  min-height: 310px;
+  max-height: 340px;
   border: 2px solid var(--effect-border-color, #020617);
   border-radius: 8px;
   background-color: var(--effect-bg-color, #5eead4);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 
+  3px 3px 0 2px rgba(2, 6, 23, 0.2); 
+  user-select: none;             
+  -webkit-user-select: none;
 }
 
 /* Top bar for effect components */
@@ -96,12 +100,18 @@
 
 /* Typography */
 .effect-title {
-  font-size: 1.25rem;
-  color: var(--effect-title-color, #ffffff);
+  font-size: clamp(1.25rem, 2vw + .5rem, 1.4rem);
+  font-weight: 500;
+  color: #ffffff;
 }
 
 /* Responsive layout for landscape */
 @media (orientation: landscape) {
+
+  .effect-container {
+    min-height: 230px;
+    max-height: 260px;
+  }
   
   .effect-content {
     display: flex;

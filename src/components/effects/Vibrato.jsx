@@ -4,61 +4,61 @@ import ToggleSwitch from "../ToggleSwitch";
 import {
   displayValueAsPercentage,
   displayValueAsFrequencies,
+  displayValueInSeconds,
 } from "@/utils/valueDisplayFns";
 import { useState, useEffect } from "react";
 
-export default function Phaser({ phaser }) {
-  const [freq, setFreq] = useState(0.5);
-  const [octaves, setOctaves] = useState(3);
-  const [Q, setQ] = useState(5);
-  const [wet, setWet] = useState(0.5);
-  const [isPhaserOn, setIsPhaserOn] = useState(false);
+export default function Vibrato({ vibrato }) {
+  const [maxDelay, setMaxDelay] = useState(0.005)
+  const [freq, setFreq] = useState(0);
+  const [depth, setDepth] = useState(0.1);
+  const [wet, setWet] = useState(0);
+  const [isVibratoOn, setIsVibratoOn] = useState(false);
 
   const valueRawRoundFn = (x) => x;
 
   {
     /* handlers */
   }
+  const handleMaxDelayChange = (e) => {
+    setMaxDelay(parseFloat(e));
+  };
   const handleFreqChange = (e) => {
     setFreq(parseFloat(e));
   };
-  const handleOctavesChange = (e) => {
-    setOctaves(parseFloat(e));
-  };
-  const handleQChange = (e) => {
-    setQ(parseFloat(e));
+  const handleDepthChange = (e) => {
+    setDepth(parseFloat(e));
   };
   const handleWetChange = (e) => {
     setWet(parseFloat(e));
   };
-  const togglePhaser = () => {
-    setIsPhaserOn((prev) => !prev);
+  const toggleVibrato = () => {
+    setIsVibratoOn((prev) => !prev);
   };
 
   useEffect(() => {
-    if (phaser) {
-      phaser.set({
-        frequency: isPhaserOn ? freq : 0.0,
-        octaves: isPhaserOn ? octaves : 0.0,
-        Q: Q,
-        wet: isPhaserOn ? wet : 0.0,
+    if (vibrato) {
+      vibrato.set({
+        maxDelay: isVibratoOn ? maxDelay : 0.0,
+        frequency: isVibratoOn ? freq : 0.0,
+        depth: isVibratoOn ? depth : 0.0,
+        wet: isVibratoOn ? wet : 0.0,
       });
     }
-  }, [phaser, freq, octaves, Q, wet, isPhaserOn]);
+  }, [vibrato, maxDelay, freq, depth, wet, isVibratoOn]);
   
-
   return (
     <div className="effect-container">
       <div className="effect-top-bar">
-        <ToggleSwitch checked={isPhaserOn} onChange={togglePhaser} />
-        <h1 className="effect-title">Phaser</h1>
+        <ToggleSwitch checked={isVibratoOn} onChange={toggleVibrato} />
+        <h1 className="effect-title">Vibrato</h1>
       </div>
       <div className="effect-content">
         <div className="effect-content-left">
           <div className="effect-knob">
             <Knob
               theme="pink"
-              label="Rate"
+              label="Freq"
               valueDefault={freq}
               valueMin={0.05}
               valueMax={20}
@@ -68,7 +68,7 @@ export default function Phaser({ phaser }) {
               valueRawDisplayFn={(value) => displayValueAsFrequencies(value)}
               orientation={"vertical"}
               onChange={(value) => handleFreqChange(value)}
-              disabled={!isPhaserOn}
+              disabled={!isVibratoOn}
             />
           </div>
           <div className="effect-knob">
@@ -84,7 +84,7 @@ export default function Phaser({ phaser }) {
               valueRawDisplayFn={(value) => displayValueAsPercentage(value)}
               orientation={"vertical"}
               onChange={(value) => handleWetChange(value)}
-              disabled={!isPhaserOn}
+              disabled={!isVibratoOn}
             />
           </div>
         </div>
@@ -93,32 +93,32 @@ export default function Phaser({ phaser }) {
             <Knob
               theme="pink"
               label="Depth"
-              valueDefault={octaves}
-              valueMin={0.5}
-              valueMax={5}
+              valueDefault={depth}
+              valueMin={0}
+              valueMax={1}
               stepFn={(value) => 0.05}
               stepLargerFn={(value) => 0.1}
               valueRawRoundFn={valueRawRoundFn}
-              valueRawDisplayFn={(value) => value.toFixed(1)}
+              valueRawDisplayFn={(value) => displayValueAsPercentage(value)}
               orientation={"vertical"}
-              onChange={(value) => handleOctavesChange(value)}
-              disabled={!isPhaserOn}
+              onChange={(value) => handleDepthChange(value)}
+              disabled={!isVibratoOn}
             />
           </div>
           <div className="effect-knob">
             <Knob
               theme="pink"
-              label="Feedback"
-              valueDefault={Q}
-              valueMin={0.5}
-              valueMax={15}
+              label="Max Delay"
+              valueDefault={maxDelay}
+              valueMin={0.005}
+              valueMax={0.1}
               stepFn={(value) => 0.05}
               stepLargerFn={(value) => 0.1}
               valueRawRoundFn={valueRawRoundFn}
-              valueRawDisplayFn={(value) => value.toFixed(1)}
+              valueRawDisplayFn={(value) => displayValueInSeconds(value)}
               orientation={"vertical"}
-              onChange={(value) => handleQChange(value)}
-              disabled={!isPhaserOn}
+              onChange={(value) => handleMaxDelayChange(value)}
+              disabled={!isVibratoOn}
             />
           </div>
         </div>

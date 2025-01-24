@@ -1,6 +1,7 @@
 import Knob from "@/components/Knob";
-import FilterSelector from "@/components/FilterSelector";
+import FilterSelector from "@/components/synth/FilterSelector";
 import { displayValueAsFrequencies } from "@/utils/valueDisplayFns";
+import "./synth.css";
 
 export default function FilterController({
   synthSettings,
@@ -14,7 +15,7 @@ export default function FilterController({
 
   return (
     <div className="inline-block row-span-1 gap-2">
-      <h1 className="font-semibold text-lg text-slate-950 mb-1">Filter</h1>
+      <h1 className="text-slate-950 mb-1">Filter</h1>
       <div className="flex flex-row gap-6 justify-start">
         <FilterSelector
           synthSettings={synthSettings}
