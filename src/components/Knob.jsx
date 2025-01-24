@@ -69,7 +69,7 @@ export default function Knob({
         className={`absolute left-1/2 transform -translate-x-1/2 transition-all duration-300 
             ${
               (isHovered && !disabled)
-                ? "top-[-60px] opacity-100 scale-100"
+                ? "top-[-55px] opacity-100 scale-100"
                 : "opacity-0 scale-50 top-0"
             }
             whitespace-nowrap text-black bg-sky-200 px-2 
@@ -83,13 +83,13 @@ export default function Knob({
 
       <div className="relative flex flex-col items-center">
         {/* Shadow */}
-        <div className="absolute w-10 h-10 bg-gray-400 rounded-full translate-x-1 translate-y-1"></div>
+        <div className="absolute w-9 h-9 bg-gray-400 rounded-full translate-x-1 translate-y-1"></div>
 
         {/* Knob */}
         <KnobHeadless
           id={knobId}
           aria-labelledby={labelId}
-          className={`relative w-10 h-10 outline-none transition-transform duration-300 ${
+          className={`relative w-9 h-9 outline-none transition-transform duration-300 ${
             isHovered && !disabled ? "scale-[2] z-50" : "z-10"
           }`}
           onMouseEnter={() => setIsHovered(true)}

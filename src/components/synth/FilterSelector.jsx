@@ -1,5 +1,6 @@
 import Selector from "@/components/Selector";
 import { filters } from "@/config/index";
+import "./synth.css";
 
 export default function FilterSelector({ synthSettings, updateSynthSettings }) {
   const handleFilterChange = (id) => {

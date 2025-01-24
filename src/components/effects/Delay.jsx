@@ -8,16 +8,14 @@ import {
 import { useState, useEffect } from "react";
 
 export default function Delay({ delay }) {
-  const [delayTime, setDelayTime] = useState(0.5); // Default delay time
-  const [feedback, setFeedback] = useState(0.5); // Default feedback
-  const [wet, setWet] = useState(0.5); // Default wet mix
-  const [isDelayOn, setIsDelayOn] = useState(true); // State for delay on/off
+  const [delayTime, setDelayTime] = useState(0.5);
+  const [feedback, setFeedback] = useState(0.5); 
+  const [wet, setWet] = useState(0.5); 
+  const [isDelayOn, setIsDelayOn] = useState(true); 
 
   const valueRawRoundFn = (x) => x;
 
-  {
-    /* handlers */
-  }
+  { /* handlers */ }
   const handleDelayTimeChange = (e) => {
     setDelayTime(parseFloat(e));
   };

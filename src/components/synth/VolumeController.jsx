@@ -1,5 +1,6 @@
 import Knob from "@/components/Knob";
 import { displayValueInDecibels } from "@/utils/valueDisplayFns";
+import "./synth.css";
 
 export default function VolumeController({ volume, handleVolumeChange }) {
   // Converts volume in dB (-48 to 0) to a normalized scale (0 to 1)
@@ -13,8 +14,8 @@ export default function VolumeController({ volume, handleVolumeChange }) {
   };
   
   return (
-    <div className="flex flex-col items-center justify-center border-dotted rounded-xl border-[#0CA789] border-4 px-4 py-1 gap-1">
-      <h1 className="font-semibold text-lg text-slate-950 mb-1">Master</h1>
+    <div className="master-box flex flex-col items-center justify-center border-dotted rounded-xl border-[#0CA789] border-2 px-4 py-1 gap-1">
+      <h1 className="text-slate-950">Master</h1>
       <Knob
         theme="master"
         label="Volume"
