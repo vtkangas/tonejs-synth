@@ -6,8 +6,8 @@
   height: 100%;
   min-width: 140px;
   max-width: 200px;
-  min-height: 310px;
-  max-height: 340px;
+  min-height: 230px; /* Moved from media query */
+  max-height: 260px; /* Moved from media query */
   border: 2px solid var(--effect-border-color, #020617);
   border-radius: 8px;
   background-color: var(--effect-bg-color, #5eead4);
@@ -34,8 +34,8 @@
 /* Effect content area */
 .effect-content {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  flex-direction: column; /* Moved from media query */
+  justify-content: space-evenly; /* Moved from media query */
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -48,8 +48,8 @@
 
 .effect-content-left {
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: row; /* Moved from media query */
+  justify-content: space-evenly; /* Moved from media query */
 }
 
 .effect-content-left:hover {
@@ -58,7 +58,8 @@
 
 .effect-content-right {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Moved from media query */
+  justify-content: space-evenly; /* Moved from media query */
 }
 
 .effect-content-right:hover {
@@ -76,15 +77,15 @@
 
 /* Dynamic child count behavior for justifying effect-knob */
 .effect-content-left:has(.effect-knob:nth-child(n+2)) .effect-knob {
-  justify-content: flex-end;
+  justify-content: center; /* Moved from media query */
 }
 
 .effect-content-left:has(.effect-knob:nth-child(n+2)) .effect-knob {
-  justify-content: flex-end;
+  justify-content: center; /* Moved from media query */
 }
 
 .effect-content-left:has(.effect-knob:nth-child(n+2)) ~ .effect-content-right .effect-knob {
-  justify-content: flex-start;
+  justify-content: center; /* Moved from media query */
 }
 
 .effect-content-left:not(:has(.effect-knob:nth-child(n+2))) .effect-knob {
@@ -93,7 +94,7 @@
 
 .effect-knob {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Moved from media query */
   flex: 1;
   width: 100%;
 }
@@ -105,51 +106,50 @@
   color: #ffffff;
 }
 
-/* Responsive layout for landscape */
-@media (orientation: landscape) {
+@media (min-height: 460px) and (max-height: 719.5px) and (max-width: 850px),
+(min-height: 460px) and (max-height: 719.5px) and (min-width: 850px),
+(min-height: 460px) and (max-width: 850px),
+(min-height: 930px) and (min-width: 850px)
+{
 
   .effect-container {
-    min-height: 230px;
-    max-height: 260px;
+    min-height: 310px;
+    max-height: 340px;
   }
-  
+
   .effect-content {
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-direction: row;
   }
 
   .effect-content-left, .effect-content-right {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly; 
-  }
-  
-  .effect-content-left:has(.effect-knob:nth-child(n+2)) {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .effect-content-left:has(.effect-knob:nth-child(n+2)) {
-    order: 2; /* Move to the bottom row */
+    flex-direction: column;
+  }
+
+  .effect-content-left:has(.effect-knob:nth-child(n+2)) {
+    order: unset;
   }
 
   .effect-content-right {
-    order: 1; /* Move to the top row */
+    order: unset;
   }
 
   .effect-content-left:has(.effect-knob:nth-child(n+2)) .effect-knob {
-    justify-content: center;
+    justify-content: flex-end;
   }
-  
+
   .effect-content-left:has(.effect-knob:nth-child(n+2)) ~ .effect-content-right .effect-knob {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .effect-knob {
     display: flex;
-    flex-direction: row;
-    flex: 1;
-    width: 100%;
+    flex-direction: column;
   }
-    
 }
+
