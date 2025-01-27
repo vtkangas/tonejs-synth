@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
-import ScrollablePiano from "./ScrollablePiano";
+import CustomScroller from "@components/CustomScroller";
 
 export default function Keyboard({ playNote, stopNote }) {
-  // List of all the keys (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)
   const pianoKeys = [
     "C",
     "C#",
@@ -18,7 +17,7 @@ export default function Keyboard({ playNote, stopNote }) {
     "B",
   ];
 
-  // Function to generate notes for the 0-6 octaves
+  // generate notes for the 0-6 octaves
   function generateNotes() {
     const notes = [];
     for (let octave = 0; octave <= 6; octave++) {
@@ -30,7 +29,6 @@ export default function Keyboard({ playNote, stopNote }) {
   }
 
   const allNotes = generateNotes();
-
   const [activeKeys, setActiveKeys] = useState(new Set());
 
   const handlePointerDown = (note) => {
@@ -57,7 +55,7 @@ export default function Keyboard({ playNote, stopNote }) {
   };
 
   return (
-    <ScrollablePiano>
+    <CustomScroller>
       {allNotes.map((note) => {
         const isBlackKey = note.includes("#");
         const isActive = activeKeys.has(note);
@@ -74,7 +72,7 @@ export default function Keyboard({ playNote, stopNote }) {
                 onPointerCancel={() => handlePointerLeave(note)}
                 onPointerUp={() => handlePointerUp(note)}
               >
-                <span className={`text-slate-950 text-xs absolute bottom-6 left-1/2 transform -translate-x-1/2`}>{note}</span>
+                <span className={`text-slate-950 text-xs absolute bottom-[2px] left-1/2 transform -translate-x-1/2`}>{note}</span>
               </button>
             )}
 
@@ -91,7 +89,7 @@ export default function Keyboard({ playNote, stopNote }) {
                 onPointerCancel={() => handlePointerLeave(note)}
                 onPointerUp={() => handlePointerUp(note)}
               >
-                <span className="text-white text-xs absolute bottom-0 left-1/2 transform -translate-x-1/2">
+                <span className="text-white text-xs absolute bottom-[2px] left-1/2 transform -translate-x-1/2">
                   {note}
                 </span>
               </button>
@@ -99,6 +97,6 @@ export default function Keyboard({ playNote, stopNote }) {
           </div>
         );
       })}
-    </ScrollablePiano>
+    </CustomScroller>
   );
 }

@@ -8,6 +8,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        small: { 'raw': '(min-height: 460px)' },
+        large: { 'raw': '(min-width: 850px) and (min-height: 720px)' },
+        xlarge: { 'raw': '(min-width: 1140px)' }
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

@@ -41,7 +41,7 @@ export default function Selector({ options, selectedOption, onSelect, label }) {
       <button
         className={`inline-flex w-[68px] h-9 p-[12px] items-center justify-center transition-transform rounded-lg border-solid border-[5px] border-slate-950 
       bg-blue-800 hover:bg-blue-400 focus:outline-none z-10 ${
-        isOpen ? "translate-x-1 translate-y-1 bg-blue-400 border-blue-800" : ""
+        isOpen ? "translate-x-1 translate-y-1" : ""
       }`}
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}

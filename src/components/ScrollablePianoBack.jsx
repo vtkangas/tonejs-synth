@@ -4,45 +4,49 @@ import { useEffect, useRef } from "react";
 export default function ScrollablePiano({ children }) {
   const scrollableRef = useRef(null);
   const scrollbarRef = useRef(null);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const scrollable = scrollableRef.current;
     const customScrollbar = scrollbarRef.current;
 
-    // Function to sync the scrollbar position with the content scroll
+    // Sync the scrollbar position with the content scroll
     const handleScroll = () => {
       const scrollLeft = scrollable.scrollLeft;
       const scrollWidth = scrollable.scrollWidth;
       const clientWidth = scrollable.clientWidth;
 
-      // Calculate the width of the custom scrollbar
+      // Width of the custom scrollbar
       const scrollbarWidth = (clientWidth / scrollWidth) * clientWidth;
       customScrollbar.style.width = `${scrollbarWidth}px`;
 
-      // Calculate and update the position of the custom scrollbar
+      // Update the position of the custom scrollbar
       const scrollPercentage = scrollLeft / (scrollWidth - clientWidth);
-      customScrollbar.style.left = `${scrollPercentage * (clientWidth - scrollbarWidth)}px`;
+      customScrollbar.style.left = `${
+        scrollPercentage * (clientWidth - scrollbarWidth)
+      }px`;
     };
 
-    // Function to handle dragging of the custom scrollbar
+    const handleResize = () => {
+      // Trigger recalculation of the scrollbar dimensions on resize
+      handleScroll();
+    };
+
     const handleDrag = (e) => {
-      e.preventDefault(); // Prevent default dragging behavior
+      e.preventDefault();
 
       const customScrollbarWidth = customScrollbar.offsetWidth;
       const scrollableWidth = scrollable.scrollWidth;
       const clientWidth = scrollable.clientWidth;
 
-      // Track the previous X position
       let prevX = e.clientX || e.touches?.[0]?.clientX;
 
       const onMouseMove = (moveEvent) => {
         const currentX = moveEvent.clientX || moveEvent.touches?.[0]?.clientX;
         const deltaX = currentX - prevX;
 
-        // Update prevX to the current position
         prevX = currentX;
 
-        // Calculate the new left position of the scrollbar
         const newLeft = Math.min(
           Math.max(0, customScrollbar.offsetLeft + deltaX),
           clientWidth - customScrollbarWidth
@@ -50,9 +54,9 @@ export default function ScrollablePiano({ children }) {
 
         customScrollbar.style.left = `${newLeft}px`;
 
-        // Calculate the scroll percentage and update the scrollable content's position
         const scrollPercentage = newLeft / (clientWidth - customScrollbarWidth);
-        scrollable.scrollLeft = scrollPercentage * (scrollableWidth - clientWidth);
+        scrollable.scrollLeft =
+          scrollPercentage * (scrollableWidth - clientWidth);
       };
 
       const onMouseUp = () => {
@@ -62,31 +66,33 @@ export default function ScrollablePiano({ children }) {
         window.removeEventListener("touchend", onMouseUp);
       };
 
-      // Add event listeners for mouse and touch movements
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("mouseup", onMouseUp);
       window.addEventListener("touchmove", onMouseMove);
       window.addEventListener("touchend", onMouseUp);
     };
 
-    // Add event listeners to sync scroll and enable dragging
+    // Event listeners for scroll and dragging
     scrollable.addEventListener("scroll", handleScroll);
     customScrollbar.addEventListener("mousedown", handleDrag);
     customScrollbar.addEventListener("touchstart", handleDrag);
+
+    // Event listener for resize
+    window.addEventListener("resize", handleResize);
 
     // Initialize the scrollbar position
     handleScroll();
 
     return () => {
-      // Clean up event listeners
       scrollable.removeEventListener("scroll", handleScroll);
       customScrollbar.removeEventListener("mousedown", handleDrag);
       customScrollbar.removeEventListener("touchstart", handleDrag);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full pl-1 pr-8">
       {/* Custom Scrollbar */}
       <div
         ref={scrollbarRef}
@@ -111,7 +117,7 @@ export default function ScrollablePiano({ children }) {
           overflowY: "hidden",
           height: "100%",
           position: "relative",
-          top: "20px"
+          top: "20px",
         }}
       >
         <div className="flex w-max h-full">{children}</div>
