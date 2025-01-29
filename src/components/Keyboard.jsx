@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import CustomScroller from "@components/CustomScroller";
+import CustomScroller from "@/components/CustomScroller";
 
 export default function Keyboard({ playNote, stopNote }) {
   const pianoKeys = [
@@ -45,15 +45,6 @@ export default function Keyboard({ playNote, stopNote }) {
     stopNote(note);
   };
 
-  const handlePointerLeave = (note) => {
-    setActiveKeys((prev) => {
-      const updated = new Set(prev);
-      updated.delete(note);
-      return updated;
-    });
-    stopNote(note);
-  };
-
   return (
     <CustomScroller>
       {allNotes.map((note) => {
@@ -68,8 +59,8 @@ export default function Keyboard({ playNote, stopNote }) {
                   isActive ? "bg-red-400" : "bg-white"
                 }`}
                 onPointerDown={() => handlePointerDown(note)}
-                onPointerLeave={() => handlePointerLeave(note)}
-                onPointerCancel={() => handlePointerLeave(note)}
+                onPointerLeave={() => handlePointerUp(note)}
+                onPointerCancel={() => handlePointerUp(note)}
                 onPointerUp={() => handlePointerUp(note)}
               >
                 <span className={`text-slate-950 text-xs absolute bottom-[2px] left-1/2 transform -translate-x-1/2`}>{note}</span>
