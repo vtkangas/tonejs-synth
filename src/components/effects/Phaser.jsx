@@ -53,11 +53,11 @@ export default function Phaser({ phaser }) {
         <ToggleSwitch checked={isPhaserOn} onChange={togglePhaser} />
         <h1 className="effect-title">Phaser</h1>
       </div>
-      <div className="effect-content">
+      <div className="effect-content-reversed">
         <div className="effect-content-left">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Rate"
               valueDefault={freq}
               valueMin={0.05}
@@ -73,7 +73,7 @@ export default function Phaser({ phaser }) {
           </div>
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="sky"
               label="Mix"
               valueDefault={wet}
               valueMin={0}
@@ -91,7 +91,7 @@ export default function Phaser({ phaser }) {
         <div className="effect-content-right">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Depth"
               valueDefault={octaves}
               valueMin={0.5}
@@ -107,7 +107,7 @@ export default function Phaser({ phaser }) {
           </div>
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Feedback"
               valueDefault={Q}
               valueMin={0.5}

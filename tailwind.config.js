@@ -13,10 +13,10 @@ module.exports = {
         large: { 'raw': '(min-width: 850px) and (min-height: 720px)' },
         xlarge: { 'raw': '(min-width: 1140px)' }
       },
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(to bottom right, #202C3A, #213558)',
       },
+
     },
   },
   plugins: [],

@@ -11,3 +11,4 @@ export const filters = [
   { id: "lowpass", src: "/lowpass.svg" },
   { id: "highpass", src: "/highpass.svg" },
 ];
+

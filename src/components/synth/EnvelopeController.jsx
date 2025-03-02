@@ -22,7 +22,7 @@ export default function EnvelopeController({
       <div className="flex flex-row gap-6 justify-start">
         {/* Attack */}
         <Knob
-          theme="pink"
+          theme="effect"
           label="Attack"
           valueDefault={synthSettings.attack}
           valueMin={0}
@@ -32,11 +32,12 @@ export default function EnvelopeController({
           valueRawRoundFn={valueRawRoundFn}
           valueRawDisplayFn={displayValueInSeconds}
           orientation={"vertical"}
+          sensitivity={0.003}
           onChange={(value) => handleKnobChange("attack", value)}
         />
         {/* Decay */}
         <Knob
-          theme="pink"
+          theme="effect"
           label="Decay"
           valueDefault={synthSettings.decay}
           valueMin={0}
@@ -50,7 +51,7 @@ export default function EnvelopeController({
         />
         {/* Sustain */}
         <Knob
-          theme="pink"
+          theme="effect"
           label="Sustain"
           valueDefault={synthSettings.sustain}
           valueMin={0}
@@ -64,7 +65,7 @@ export default function EnvelopeController({
         />
         {/* Realease */}
         <Knob
-          theme="pink"
+          theme="effect"
           label="Release"
           valueDefault={synthSettings.release}
           valueMin={0}

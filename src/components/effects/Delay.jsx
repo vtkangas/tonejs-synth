@@ -11,7 +11,7 @@ export default function Delay({ delay }) {
   const [delayTime, setDelayTime] = useState(0.5);
   const [feedback, setFeedback] = useState(0.5); 
   const [wet, setWet] = useState(0.5); 
-  const [isDelayOn, setIsDelayOn] = useState(true); 
+  const [isDelayOn, setIsDelayOn] = useState(false); 
 
   const valueRawRoundFn = (x) => x;
 
@@ -47,7 +47,7 @@ export default function Delay({ delay }) {
         <div className="effect-content-left">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Feedback"
               valueDefault={feedback}
               valueMin={0}
@@ -65,7 +65,7 @@ export default function Delay({ delay }) {
         <div className="effect-content-right">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Time"
               valueDefault={delayTime}
               valueMin={0}
@@ -81,7 +81,7 @@ export default function Delay({ delay }) {
           </div>
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="indian-red"
               label="Mix"
               valueDefault={wet}
               valueMin={0}

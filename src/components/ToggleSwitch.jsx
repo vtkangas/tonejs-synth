@@ -9,7 +9,7 @@ export default function ToggleSwitch({ checked, onChange }) {
     >
       <div
         className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full shadow-md transform transition-transform duration-300 ${
-          checked ? 'translate-x-6 bg-[#0C8971]' : 'bg-[#DA0063]'
+          checked ? 'translate-x-6 bg-[#29ac79]' : 'bg-[#DA0063]'
         }`}
       ></div>
     </div>

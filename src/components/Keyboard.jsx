@@ -69,15 +69,15 @@ export default function Keyboard({ playNote, stopNote }) {
 
             {isBlackKey && (
               <button
-                className={`absolute min-w-[52px] h-1/2 z-10 ${
+                className={`absolute min-w-[60px] h-1/2 z-10 border-solid border-x-[1px] border-white ${
                   isActive ? "bg-red-400" : "bg-slate-950"
                 }`}
                 style={{
                   left: "calc(100% - 26px)",
                 }}
                 onPointerDown={() => handlePointerDown(note)}
-                onPointerLeave={() => handlePointerLeave(note)}
-                onPointerCancel={() => handlePointerLeave(note)}
+                onPointerLeave={() => handlePointerUp(note)}
+                onPointerCancel={() => handlePointerUp(note)}
                 onPointerUp={() => handlePointerUp(note)}
               >
                 <span className="text-white text-xs absolute bottom-[2px] left-1/2 transform -translate-x-1/2">

@@ -53,11 +53,11 @@ export default function Vibrato({ vibrato }) {
         <ToggleSwitch checked={isVibratoOn} onChange={toggleVibrato} />
         <h1 className="effect-title">Vibrato</h1>
       </div>
-      <div className="effect-content">
+      <div className="effect-content-reversed">
         <div className="effect-content-left">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Freq"
               valueDefault={freq}
               valueMin={0.05}
@@ -91,7 +91,7 @@ export default function Vibrato({ vibrato }) {
         <div className="effect-content-right">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Depth"
               valueDefault={depth}
               valueMin={0}
@@ -107,7 +107,7 @@ export default function Vibrato({ vibrato }) {
           </div>
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Max Delay"
               valueDefault={maxDelay}
               valueMin={0.005}

@@ -18,8 +18,9 @@ export default function Synth({
         small:flex-col small:items-center small:justify-center small:min-h-[310px] small:max-h-[340px]
         large:flex-row large:items-center large:justify-center large:min-h-[230px] large:max-h-[260px]
         
-        bg-emerald-200 rounded-lg border-solid border-2 border-slate-950 
-        p-4 shadow-[3px_3px_0px_2px_rgba(2,6,23,0.2)]"
+        bg-[#45C4B1ff] rounded-lg  
+        p-4 shadow-[3px_3px_0px_2px_rgba(2,6,23,0.5)]
+      "
     >
       {/* wave and volume */}
       <div className="flex w-full flex-col small:flex-row large:flex-col items-center justify-center mr-6 small:mr-0 large:mr-6 gap-y-2 small:gap-y-4">
@@ -38,7 +39,7 @@ export default function Synth({
         </div>
       </div>
       {/* envelope and filter */} 
-      <div className="flex flex-col gap-2 small:gap-4 bg-emerald-200">
+      <div className="flex flex-col gap-2 small:gap-4">
         <EnvelopeController
           synthSettings={synthSettings}
           updateSynthSettings={updateSynthSettings}

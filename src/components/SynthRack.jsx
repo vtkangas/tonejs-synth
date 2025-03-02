@@ -7,6 +7,7 @@ import Reverb from "@/components/effects/Reverb";
 import Phaser from "@/components/effects/Phaser";
 import Vibrato from "@/components/effects/Vibrato";
 import Keyboard from "@/components/Keyboard";
+import Distortion from "./effects/Distortion";
 
 export default function SynthRack() {
   const {
@@ -22,6 +23,7 @@ export default function SynthRack() {
     reverb,
     phaser,
     vibrato,
+    distortion,
   } = useSynth();
 
   // I f  T o n e . j s  i s  n o t  s u p p o r t e d ! ! !
@@ -63,29 +65,32 @@ export default function SynthRack() {
           <div
             className="flex flex-row row-span-8 items-center overflow-hidden 
             small:row-span-7 large:flex-col xlarge:justify-center
-            w-full overflow-x-auto snap-x snap-mandatory scroll-smooth p-4 bg-blue-200 gap-2 large:gap-4"
+            w-full overflow-x-auto snap-x snap-mandatory scroll-smooth p-4 bg-custom-gradient bg-opacity-50 gap-2 large:gap-4"
           >
-              <div className="flex items-center large:items-end h-full scroll-ml-3 snap-start snap-always">
-                <Synth
-                  synthSettings={synthSettings}
-                  updateSynthSettings={updateSynthSettings}
-                  handleVolumeChange={handleVolumeChange}
-                />
+            <div className="flex items-center large:items-end h-full scroll-ml-3 snap-start snap-always">
+              <Synth
+                synthSettings={synthSettings}
+                updateSynthSettings={updateSynthSettings}
+                handleVolumeChange={handleVolumeChange}
+              />
+            </div>
+            <div className="flex h-full gap-2">
+              <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
+                <Distortion distortion={distortion} />
               </div>
-              <div className="flex h-full gap-2">
-                <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start snap-always">
-                  <Delay delay={feedbackDelay} />
-                </div>
-                <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
-                  <Reverb reverb={reverb} />
-                </div>
-                <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
-                  <Phaser phaser={phaser} />
-                </div>
-                <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
-                  <Vibrato vibrato={vibrato} />
-                </div>
+              <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
+                <Phaser phaser={phaser} />
               </div>
+              <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
+                <Vibrato vibrato={vibrato} />
+              </div>
+              <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start snap-always">
+                <Delay delay={feedbackDelay} />
+              </div>
+              <div className="flex items-center large:items-start h-full scroll-ml-2 snap-start">
+                <Reverb reverb={reverb} />
+              </div>
+            </div>
           </div>
           {/* keyboard */}
           <div className="flex row-span-2 small:row-span-3 h-full w-screen bg-pink-500 overflow-x-auto overflow-y-hidden">

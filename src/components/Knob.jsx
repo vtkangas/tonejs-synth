@@ -24,6 +24,7 @@ export default function Knob({
   mapFrom01 = mapFrom01Linear,
   onChange,
   disabled = false,
+  sensitivity
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const knobId = useId();
@@ -31,7 +32,7 @@ export default function Knob({
   const [valueRaw, setValueRaw] = useState(valueDefault);
   const step = stepFn(valueRaw);
   const stepLarger = stepLargerFn(valueRaw);
-  const dragSensitivity = 0.006;
+  const dragSensitivity = sensitivity || 0.006;
 
   // mapping raw value to 0-1 scale and back to actual range
   const value01 = mapTo01(valueRaw, valueMin, valueMax); // Normalize to 0-1 range
@@ -83,7 +84,7 @@ export default function Knob({
 
       <div className="relative flex flex-col items-center">
         {/* Shadow */}
-        <div className="absolute w-9 h-9 bg-gray-400 rounded-full translate-x-1 translate-y-1"></div>
+        <div className="absolute w-9 h-9 bg-slate-950/40 rounded-full translate-x-1 translate-y-1"></div>
 
         {/* Knob */}
         <KnobHeadless

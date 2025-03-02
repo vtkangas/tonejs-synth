@@ -20,6 +20,7 @@ const useSynth = () => {
   const [reverb, setReverb] = useState(null);
   const [phaser, setPhaser] = useState(null);
   const [vibrato, setVibrato] = useState(null);
+  const [distortion, setDistortion] = useState(null);
 
 
   // C h e c k  T o n e . j s  s u p p o r t
@@ -41,6 +42,7 @@ const useSynth = () => {
     let newReverb;
     let newPhaser;
     let newVibrato;
+    let newDistortion;
 
     if (audioStarted) {
       synthRef.current = new Tone.PolySynth(Tone.MonoSynth, {
@@ -98,11 +100,19 @@ const useSynth = () => {
       });
       setVibrato(newVibrato);
 
+      newDistortion = new Tone.Distortion({
+        distortion: 0.1,
+        oversample: "2x",
+        wet: 0.5,
+      })
+      setDistortion(newDistortion);
+
       synthRef.current.chain(
-        newDelay,
-        newReverb,
+        newDistortion,
         newPhaser,
         newVibrato,
+        newDelay,
+        newReverb,
         Tone.getDestination()
       );
       Tone.getDestination().volume.value = synthSettings.volume;
@@ -223,6 +233,7 @@ const useSynth = () => {
     reverb,
     phaser,
     vibrato,
+    distortion
   };
 };
 

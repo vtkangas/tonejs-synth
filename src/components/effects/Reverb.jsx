@@ -11,7 +11,7 @@ export default function Reverb({ reverb }) {
   const [decay, setDecay] = useState(0.5);
   const [preDelay, setPreDelay] = useState(0.5);
   const [wet, setWet] = useState(0.5);
-  const [isReverbOn, setIsReverbOn] = useState(true);
+  const [isReverbOn, setIsReverbOn] = useState(false);
 
   const valueRawRoundFn = (x) => x;
 
@@ -49,7 +49,7 @@ export default function Reverb({ reverb }) {
         <div className="effect-content-left">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Decay"
               valueDefault={decay}
               valueMin={0.1}
@@ -67,7 +67,7 @@ export default function Reverb({ reverb }) {
         <div className="effect-content-right">
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="effect"
               label="Pre-Delay"
               valueDefault={preDelay}
               valueMin={0}
@@ -83,7 +83,7 @@ export default function Reverb({ reverb }) {
           </div>
           <div className="effect-knob">
             <Knob
-              theme="pink"
+              theme="green"
               label="Mix"
               valueDefault={wet}
               valueMin={0}

@@ -22,7 +22,7 @@ export default function FilterController({
           updateSynthSettings={updateSynthSettings}
         />
         <Knob
-          theme="pink"
+          theme="effect"
           label="Q"
           valueDefault={synthSettings.filterQ}
           valueMin={0}
@@ -35,7 +35,7 @@ export default function FilterController({
           onChange={(value) => handleKnobChange("filterQ", value)}
         />
         <Knob
-          theme="pink"
+          theme="effect"
           label="Freq"
           valueDefault={synthSettings.filterFreq}
           valueMin={20}
@@ -45,6 +45,7 @@ export default function FilterController({
           valueRawRoundFn={valueRawRoundFn}
           valueRawDisplayFn={displayValueAsFrequencies}
           orientation={"vertical"}
+          sensitivity={0.001}
           onChange={(value) => handleKnobChange("filterFreq", value)}
         />
       </div>
